@@ -11,25 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11926255-ed71-4bde-aaed-b406b47b8803" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/design_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/httpmime_4_5_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_23_3_0.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/nl/tma/tmaapp/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/nl/tma/tmaapp/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/nl/tma/tmaapp/ProjectOverviewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/nl/tma/tmaapp/ProjectOverviewActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_project_overview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_project_overview.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_project_overview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_project_overview.xml" />
     </list>
     <ignored path="TmaApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,8 +47,8 @@
       <file leaf-file-name="ProjectOverviewActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/tma/tmaapp/ProjectOverviewActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44947734">
-              <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.6271777">
+              <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2190,6 +2172,13 @@
       <option name="number" value="Default" />
       <updated>1462870272747</updated>
     </task>
+    <task id="LOCAL-00001" summary="update voor ik naar school ga">
+      <created>1464253287691</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1464253287691</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2247,7 +2236,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="update voor ik naar school ga" />
+    <option name="LAST_COMMIT_MESSAGE" value="update voor ik naar school ga" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2720,8 +2710,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/tma/tmaapp/ProjectOverviewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44947734">
-          <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.6271777">
+          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
