@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="10%"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="De naam van het project"
+        android:id="@+id/textView" />
+
+
+    <Button
+
+        app:layout_widthPercent="20%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="10%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button" />
+
+
+
+    <Button
+        app:layout_widthPercent="20%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="10%"
+        app:layout_marginRightPercent="20%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button2"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        app:layout_widthPercent="20%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="10%"
+        app:layout_marginLeftPercent="40%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button3"
+        />
+    <Button
+        app:layout_widthPercent="20%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="10%"
+        app:layout_marginLeftPercent="60%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button4"
+         />
+    <Button
+        app:layout_widthPercent="20%"
+        app:layout_heightPercent="10%"
+        app:layout_marginTopPercent="10%"
+        app:layout_marginLeftPercent="80%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button5"
+        />
+
+    <ListView
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="80%"
+        app:layout_marginTopPercent="20%"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView" />
+</android.support.percent.PercentFrameLayout>
