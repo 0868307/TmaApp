@@ -29,5 +29,6 @@ dependencies {
     compile 'com.android.support:percent:23.1.1'
     compile 'org.apache.james:apache-mime4j:0.7.2'
     compile 'org.apache.httpcomponents:httpmime:4.5.2'
+    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
 
 }

@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,13 +26,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.PostMethod;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +70,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -195,7 +197,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("");
     }
 
     private boolean isPasswordValid(String password) {
@@ -274,51 +276,46 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            authenthicate(mEmail,mPassword);
-            return true;
+
+             authenthicate(mEmail,mPassword);
+
+
+                return true;
+
         }
         private String authenthicate(String email, String password){
-            String auth_code = "";
-            URL url = null;
-            InputStream in;
-            OutputStream out;
-            int http_status;
-            email = mEmail;
-            password = mPassword;
-
-
-
-            HttpURLConnection urlConnection = null;
+            String resp = "";
+            HttpClient httpClient = new HttpClient();
+            PostMethod postMethod = new PostMethod("http://10.0.2.2:8080/login");
+            postMethod.addParameter("username", email);
+            postMethod.addParameter("password", password);
+            Log.d("MyApp",password);
+            Log.d("MyApp",email);
             try {
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setDoOutput(true);
-                urlConnection.setChunkedStreamingMode(0);
-                urlConnection.setRequestProperty("Content-Type", "form-data");
-
-                out = new BufferedOutputStream(urlConnection.getOutputStream());
-                out.write(email.getBytes());
-                out.write(password.getBytes());
-                out.flush();
-
-                if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                    throw new RuntimeException("Failed : HTTP error code : "
-                            + urlConnection.getResponseCode());
-                }
-                in = new BufferedInputStream(urlConnection.getInputStream());
-
-                String output;
-                System.out.println("Output from Server .... \n");
-                while ((output = in.toString()) != null) {
-                    System.out.println(output);
-                }
-
+                httpClient.executeMethod(postMethod);
+                Log.d("MyApp", "dit pakt die ook");
+            } catch (HttpException e) {
+                e.printStackTrace();
+                Log.d("MyApp", "dit pakt die niet ook");
             } catch (IOException e) {
                 e.printStackTrace();
-            }finally {
-                urlConnection.disconnect();
+                Log.d("MyApp", "dit fuck dis shit die ook");
             }
-            return auth_code;
+
+            if (postMethod.getStatusCode() == HttpStatus.SC_OK) {
+                try {
+                    resp = postMethod.getResponseBodyAsString();
+                    Log.d("MyApp", resp);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+               System.out.println("error");
+            }
+            return resp;
         }
+
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
