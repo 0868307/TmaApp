@@ -7,29 +7,17 @@
     android:fitsSystemWindows="true"
     tools:context=".HomeOverviewActivity">
 
-
-
-    <ListView
-        app:layout_widthPercent="100%"
-        app:layout_heightPercent="70%"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_marginTopPercent="30%"
-        android:id="@+id/projectListView"
-        android:layout_below="@+id/app_bar" />
-
-
     <TextView style="@android:style/TextAppearance.Large"
         app:layout_widthPercent="70%"
         app:layout_heightPercent="10%"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_marginLeftPercent="15%"
-        android:id="@+id/homeText"
+        android:id="@+id/username"
         android:layout_below="@+id/app_bar"
         android:textSize="40dp"
         android:textAlignment="center"
-        android:text="Home" />
+        android:text="Username" />
 
 
     <Button
@@ -39,7 +27,7 @@
         app:layout_marginLeftPercent="15%"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
+        android:text="nothing"
         android:id="@+id/toProfile"
         android:layout_below="@+id/button"
         android:layout_alignParentLeft="true"
@@ -52,7 +40,7 @@
         app:layout_marginLeftPercent="55%"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="General ranking"
+        android:text="test"
         android:id="@+id/toGeneralRanking"
         android:layout_below="@+id/button"
         android:layout_alignParentLeft="true"

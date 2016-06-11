@@ -24,13 +24,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProjectActivity"
+            android:name=".HomeActivity"
             android:label="@string/title_activity_project"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ProjectOverviewActivity"
+            android:name=".HomeOverviewActivity"
             android:label="@string/title_activity_project_overview"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".UserProfile"
+            android:label="UserProfile"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".graphsUser"
+            android:label="graphsUser"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -1,12 +1,15 @@
 package nl.tma.tmaapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,19 +25,38 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ProjectOverviewActivity extends AppCompatActivity {
+public class HomeOverviewActivity extends AppCompatActivity {
     ListView myList;
 
     private String responseData;
     private List<String> allNames = new ArrayList<String>();
+    SharedPreferences sharedpreferences;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_project_overview);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        final Gson gson = new Gson();
+
+
+
+
+        sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+        setContentView(R.layout.activity_project_overview);
+        Button go_to_profile = (Button) findViewById(R.id.toProfile);
+        go_to_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeOverviewActivity.this, UserProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        String Weight = sharedpreferences.getString("auth_token", null);
+        Log.d("app", Weight);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://145.24.222.137:8090/ranking")
+                .addHeader("Authorization", Weight)
+                .url("http://10.0.2.2:8080/ranking")
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -60,8 +82,6 @@ public class ProjectOverviewActivity extends AppCompatActivity {
 
             }
         });
-
-
         myList = (ListView) findViewById(R.id.projectListView);
         myList.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, allNames));
 

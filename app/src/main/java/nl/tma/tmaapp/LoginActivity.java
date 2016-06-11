@@ -2,9 +2,11 @@ package nl.tma.tmaapp;
 
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -18,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -47,30 +50,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] auth_code = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+    private String MyPREFERENCES = "MyPrefs";
     private UserLoginTask mAuthTask = null;
-
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -95,8 +86,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void populateAutoComplete() {
@@ -152,11 +152,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (mAuthTask != null) {
             return;
         }
-
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
-
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -183,13 +181,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
@@ -274,17 +267,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
+
         @Override
         protected Boolean doInBackground(Void... params) {
-
-             authenthicate(mEmail,mPassword);
-
-
+            authenthicate(mEmail,mPassword);
+            if (authenthicate(mEmail,mPassword) != null) {
                 return true;
+            }
+            else {
+                return false;
+            }
 
         }
         private String authenthicate(String email, String password){
-            String resp = "";
+            String result = "";
             HttpClient httpClient = new HttpClient();
             PostMethod postMethod = new PostMethod("http://10.0.2.2:8080/login");
             postMethod.addParameter("username", email);
@@ -296,24 +292,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Log.d("MyApp", "dit pakt die ook");
             } catch (HttpException e) {
                 e.printStackTrace();
-                Log.d("MyApp", "dit pakt die niet ook");
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.d("MyApp", "dit fuck dis shit die ook");
+
             }
 
             if (postMethod.getStatusCode() == HttpStatus.SC_OK) {
                 try {
-                    resp = postMethod.getResponseBodyAsString();
-                    Log.d("MyApp", resp);
+                    result = postMethod.getResponseBodyAsString();
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    editor.putString("auth_token", result);
+                    editor.commit();
+                    Log.d("MyApp", result);
+
 
                 } catch (IOException e) {
                     e.printStackTrace();
+
                 }
             } else {
                System.out.println("error");
             }
-            return resp;
+            return result;
         }
 
         @Override
@@ -321,8 +323,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
 
 
-            if (success) {
-                Intent intent = new Intent(getBaseContext(), ProjectOverviewActivity.class);
+            if (success == true) {
+
+                Intent intent = new Intent(getBaseContext(), graphsUser.class);
                 startActivity(intent);
                 finish();
             } else {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".HomeOverviewActivity">
+
+    <TextView style="@android:style/TextAppearance.Large"
+        app:layout_widthPercent="70%"
+        app:layout_heightPercent="10%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_marginLeftPercent="15%"
+        android:id="@+id/username"
+        android:layout_below="@+id/app_bar"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:text="Username" />
+
+
+    <TextView
+        app:layout_widthPercent="100%"
+        app:layout_heightPercent="70%"
+        app:layout_marginTopPercent="20%"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="De grafieken"
+        android:id="@+id/textView" />
+
+
+
+
+
+</android.support.percent.PercentFrameLayout>
