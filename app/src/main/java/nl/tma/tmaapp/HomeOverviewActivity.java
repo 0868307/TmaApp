@@ -25,6 +25,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
+/**
+ *
+ * All the code of the home activity is found in this activity.
+ * here we set all the buttons to go to the correct page and we make an api call
+ *
+ */
 public class HomeOverviewActivity extends AppCompatActivity {
     ListView myList;
 
@@ -40,9 +47,9 @@ public class HomeOverviewActivity extends AppCompatActivity {
 
 
         sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-
         setContentView(R.layout.activity_project_overview);
         Button go_to_profile = (Button) findViewById(R.id.toProfile);
+        getDataApi();
         go_to_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,12 +58,19 @@ public class HomeOverviewActivity extends AppCompatActivity {
             }
         });
 
-        String Weight = sharedpreferences.getString("auth_token", null);
+
+        myList = (ListView) findViewById(R.id.projectListView);
+        myList.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, allNames));
+
+
+    }
+    public void getDataApi(){
+        String Weight = sharedpreferences.getString("auth_token", null); // gets the token out of the shared preferences
         Log.d("app", Weight);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .addHeader("Authorization", Weight)
-                .url("http://10.0.2.2:8080/ranking")
+                .url("http://10.0.2.2:8080/ranking") // the url needs to be set to the right server url
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -76,22 +90,14 @@ public class HomeOverviewActivity extends AppCompatActivity {
 
                     }
                 } catch (JSONException e) {
-
                 }
-
-
             }
         });
-        myList = (ListView) findViewById(R.id.projectListView);
-        myList.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, allNames));
-
-
-
-
 
     }
 
 
 
-    }
+
+}
 

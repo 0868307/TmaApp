@@ -2,14 +2,35 @@ package nl.tma.tmaapp;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
- * To work on unit tests, switch the Test Artifact in the Build Variants view.
+ * dit zijn de unittests om de username te testen
+ *
+ *
  */
+
 public class ExampleUnitTest {
+
+
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void testValidEmailId() throws Exception {
+        LoginActivity loginActivity= new LoginActivity();
+    /*Act*/
+        boolean result = loginActivity.isUsernameValid("andy@testdomain.com");
+    /*Assert*/
+        assertFalse(result );
     }
+
+    @Test
+    public void testInvalidEmailId() throws Exception {
+    /*Arrange*/
+        LoginActivity loginActivity= new LoginActivity();
+    /*Act*/
+        boolean result = loginActivity.isUsernameValid("andy@testdomain");
+    /*Assert*/
+        assertTrue(result);
+    }
+
 }

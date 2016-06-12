@@ -6,7 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 /**
- * Created by draikos on 6/11/2016.
+ * Created by jelle on 6/11/2016.
+ * Dit zijn de unit tests die kijken of de username klopt
  */
 public class ProjectMainActivity extends AppCompatActivity {
 

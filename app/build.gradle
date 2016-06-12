@@ -27,8 +27,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.android.support:percent:23.1.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.5'
     compile 'org.apache.james:apache-mime4j:0.7.2'
     compile 'org.apache.httpcomponents:httpmime:4.5.2'
     compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
 
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'org.testng:testng:6.9.6'
 }
