@@ -25,17 +25,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A login screen that offers login via username/password.
@@ -223,7 +221,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
-
         @Override
         protected Boolean doInBackground(Void... params) {
             authenthicate(mUsername,mPassword);
@@ -235,7 +232,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
         }
-
         private String authenthicate(String email, String password){
             String result = "";
             OkHttpClient client = new OkHttpClient();
@@ -247,7 +243,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Response response = client.newCall(request).execute();
 				SharedPreferences.Editor editor = sharedpreferences.edit();
 				editor.clear();
-				editor.commit();
 				editor.putString("auth_token", response.body().string());
 				editor.commit();
 				Log.d("MyApp", result); // om te kijken of het resultaat klopt
@@ -265,9 +260,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
 
 
-            if (success == true) {
+            if (success) {
 
-                Intent intent = new Intent(getBaseContext(), graphsUser.class);
+                Intent intent = new Intent(getBaseContext(), HomeActivity.class);
                 startActivity(intent);
                 finish();
             } else {
