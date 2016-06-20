@@ -25,10 +25,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.PostMethod;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -127,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mUsername.setError(getString(R.string.error_field_required));
             focusView = mUsername;
             cancel = true;
-        } else if (isUsernameValid(email)) {
+        } else if (!isUsernameValid(email)) {
             mUsername.setError(getString(R.string.error_invalid_email));
             focusView = mUsername;
             cancel = true;
@@ -237,38 +238,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private String authenthicate(String email, String password){
             String result = "";
-            HttpClient httpClient = new HttpClient();
-            PostMethod postMethod = new PostMethod("http://10.0.2.2:8080/login");
-            postMethod.addParameter("username", email);
-            postMethod.addParameter("password", password);
-            Log.d("MyApp",password);
-            Log.d("MyApp",email);
-            try {
-                httpClient.executeMethod(postMethod);
-                Log.d("MyApp", "dit pakt die ook");
-            } catch (HttpException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            OkHttpClient client = new OkHttpClient();
+			Request request = new Request.Builder()
+                .url("http://145.24.222.137:8090/login?username="+email+"&password="+password)
+                .build();
 
-            }
-
-            if (postMethod.getStatusCode() == HttpStatus.SC_OK) {
-                try {
-                    result = postMethod.getResponseBodyAsString();
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.clear();
-                    editor.commit();
-                    editor.putString("auth_token", result);
-                    editor.commit();
-                    Log.d("MyApp", result); // om te kijken of het resultaat klopt
+			try {
+                Response response = client.newCall(request).execute();
+				SharedPreferences.Editor editor = sharedpreferences.edit();
+				editor.clear();
+				editor.commit();
+				editor.putString("auth_token", response.body().string());
+				editor.commit();
+				Log.d("MyApp", result); // om te kijken of het resultaat klopt
 
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 
-                }
-            }
+			}
             return result;
         }
 
