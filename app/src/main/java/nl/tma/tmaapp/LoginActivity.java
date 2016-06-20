@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String regex = "/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/";
         Pattern pattern = Pattern.compile(regex);
         Matcher m = pattern.matcher(email);
-        return m.matches();
+        return email.length() > 4;
     }
 
     public boolean isPasswordValid(String password) {
